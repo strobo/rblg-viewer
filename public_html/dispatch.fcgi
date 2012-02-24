@@ -18,9 +18,11 @@ def getnote():
     while next_url:
         res = urllib2.urlopen(next_url)
         buf = res.read();
-        notes_url = re.compile('(/notes/\d+/\w+\?from_c=\d+)').search(buf)
         result += buf
 
+        notes_url = re.compile('(/notes/\d+/\w+\?from_c=\d+)').search(buf)
+        if not notes_url
+            return result
         next_url = base_url + notes_url.group(1)
     return result
 
