@@ -13,7 +13,17 @@ def getnote():
     notes_url = re.compile('(/notes/\d+/\w+)\?').search(res.read())
 
     next_url = base_url + notes_url.group(1)
-    return next_url
+    
+    result = ''
+    while next_url:
+        res = urllib2.urlopen(next_url)
+        buf = res.read();
+        notes_url = re.compile('(/notes/\d+/\w+\?from_c=\d+)').search(buf)
+        result += buf
+
+        next_url = base_url + notes_url.group(1)
+    return result
+
 
 
 def myapp(environ, start_response):
