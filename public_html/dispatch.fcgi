@@ -2,7 +2,6 @@
 import sys
 import re
 import urllib2
-import logging
 sys.path.insert(0, "/home/FLX_PROJECT_NAME/lib/")
 
 def getnote():
@@ -11,10 +10,11 @@ def getnote():
     base_url = base_url.group(1)
 
     res = urllib2.urlopen(url)
-    notes_url = re.compile('(/notes/\d+/\w+)\?').search(res.read())
+    return res.read()
+    #notes_url = re.compile('(/notes/\d+/\w+)\?').search(res.read())
 
-    next_url = base_url + notes_url.group(1)
-    return next_url
+    #next_url = base_url + notes_url.group(1)
+    #return next_url
 
 
 def myapp(environ, start_response):
