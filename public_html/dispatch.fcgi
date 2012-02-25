@@ -31,12 +31,12 @@ def getnote():
 
 
 def myapp(environ, start_response):
-    req = pprint.pformat(environ)
+    #req = pprint.pformat(environ)
     #req = environ['QUERY_STRING']
     start_response('200 OK', [('Content-Type', 'text/plain')])
 
     #return [getnote()]
-    rerurn req
+    rerurn "req"
 
 if __name__ == '__main__':
     from fcgi import WSGIServer
