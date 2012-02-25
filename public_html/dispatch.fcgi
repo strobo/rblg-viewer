@@ -38,7 +38,7 @@ def myapp(environ, start_response):
     start_response('200 OK', [('Content-Type', 'text/plain')])
 
     #return [getnote()]
-    return [req]
+    return [pprint.pformat(req)]
 
 if __name__ == '__main__':
     from fcgi import WSGIServer
