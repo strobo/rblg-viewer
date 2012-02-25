@@ -6,8 +6,8 @@ import pprint
 
 sys.path.insert(0, "/home/FLX_PROJECT_NAME/lib/")
 
-def getnote():
-    url = 'http://strobot.tumblr.com/post/18123513647/kamatama-udon-cherrypin'
+def getnote(url):
+    #url = 'http://strobot.tumblr.com/post/18123513647/kamatama-udon-cherrypin'
     base_url = re.compile('(http://[\w-]+\.tumblr\.com)').search(url)
     base_url = base_url.group(1)
 
@@ -37,8 +37,8 @@ def myapp(environ, start_response):
     req = { req[0]: req[2]}
     start_response('200 OK', [('Content-Type', 'text/plain')])
 
-    #return [getnote()]
-    return [pprint.pformat(req)]
+    return [getnote(req['q'])]
+    #return [pprint.pformat(req)]
 
 if __name__ == '__main__':
     from fcgi import WSGIServer
