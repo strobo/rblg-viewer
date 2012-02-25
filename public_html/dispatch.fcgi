@@ -29,9 +29,11 @@ def getnote():
 
 
 def myapp(environ, start_response):
+    req = environ['QUERY_STRING']
     start_response('200 OK', [('Content-Type', 'text/plain')])
-    data = getnote();
-    return ['Hello World!\n'+ data]
+
+    #return [getnote()]
+    rerurn req
 
 if __name__ == '__main__':
     from fcgi import WSGIServer
