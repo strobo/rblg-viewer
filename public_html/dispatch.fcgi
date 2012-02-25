@@ -31,8 +31,8 @@ def getnote():
 
 
 def myapp(environ, start_response):
-    req = pprint.pformat(environ)
-    #req = environ['QUERY_STRING']
+    #req = pprint.pformat(environ)
+    req = environ.get('QERY_STRING')
     start_response('200 OK', [('Content-Type', 'text/plain')])
 
     #return [getnote()]
