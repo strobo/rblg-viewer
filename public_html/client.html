@@ -1,0 +1,16 @@
+<html>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script>
+        $(function(){
+            console.log("start");
+            url = "http://strobot.tumblr.com/post/18123513647/kamatama-udon-cherrypin";
+
+            $.get("/",{"q":url},function(res){
+                console.log(res);
+            });
+        });
+    </script>
+    <body>
+        <h1>client</h1>
+        <input type="text"id="text_url">
+</html>
