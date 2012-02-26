@@ -34,12 +34,12 @@ def myapp(environ, start_response):
     #req = pprint.pformat(environ)
     req = environ.get('QUERY_STRING')
     req = urllib.unquote(req)
-    #req = req.partition('=')
-    #req = { req[0]: req[2]}
+    req = req.partition('=')
+    req = { req[0]: req[2]}
     start_response('200 OK', [('Content-Type', 'text/plain')])
 
-    #return [getnote(req['q'])]
-    return [pprint.pformat(req)]
+    return [getnote(req['q'])]
+    #return [pprint.pformat(req)]
 
 if __name__ == '__main__':
     from fcgi import WSGIServer
