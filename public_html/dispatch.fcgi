@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import sys
 import re
-import urllib2
+import urllib
 import pprint
 
 sys.path.insert(0, "/home/FLX_PROJECT_NAME/lib/")
@@ -11,14 +11,14 @@ def getnote(url):
     base_url = re.compile('(http://[\w-]+\.tumblr\.com)').search(url)
     base_url = base_url.group(1)
 
-    res = urllib2.urlopen(url)
+    res = urllib.urlopen(url)
     notes_url = re.compile('(/notes/\d+/\w+)\?').search(res.read())
 
     next_url = base_url + notes_url.group(1)
     
     result = ''
     while next_url:
-        res = urllib2.urlopen(next_url)
+        res = urllib.urlopen(next_url)
         buf = res.read();
         result += buf
 
@@ -33,6 +33,7 @@ def getnote(url):
 def myapp(environ, start_response):
     #req = pprint.pformat(environ)
     req = environ.get('QUERY_STRING')
+    req = urllib.unquote(req)
     #req = req.partition('=')
     #req = { req[0]: req[2]}
     start_response('200 OK', [('Content-Type', 'text/plain')])
