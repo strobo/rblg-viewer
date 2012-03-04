@@ -1,8 +1,10 @@
-function NoteCell(html, name, url){
+function NoteCell(html, id){
     this.html = html;
-    this.name = name;
-    this.url = url;
+    this.id = id;
     this.child = new Array();
+    this.addChild = function(html, id){
+        this.child.push(new NoteCell(html, id));
+    }
 }
 function NoteTree(){
     this.html;
@@ -11,8 +13,6 @@ function NoteTree(){
     this.child = new Array();
 
 
-    this.add = function(html,name,url){}
-
     this.addChild = function(html, name, url){
         this.child.push(new NoteCell(html, name, url));
     }
@@ -20,7 +20,7 @@ function NoteTree(){
 }
 function PreNote(){
     this.note = new Array();
-    this.tree = {};
+    this.tree = new NoteTree();
     this.add = function(img_link_url, img_url, dst_url, dst_uname, src_url, src_uname){
         this.note.push({
             img_link_url : img_link_url,
@@ -32,32 +32,33 @@ function PreNote(){
         });
     }
         this.noteToTree = function(){
-            
+            for(var i = this.note.length - 1; i >= 0; i--){
+                var noteCell = this.note[i];
+                var html = '<a href="'+ noteCell.dst_url +'"><img src="'+ noteCell.img_url + '">'+ noteCell.dst_uname +'</a>';
+                var id = this.note.length - 1 - i;
+                if(id === 0){
+                    this.tree = new NoteCell(html, id);
+                    continue;
+                }
+                //this.tree.
+            }
     }
 }
-pre_note = {
-    img_link_url:"",
-    img_url:"",
-    dst_url:"",
-    dst_uname:"",
-    src_url:"",
-    src_uname:""
-};
 
 
 
+prenote = new PreNote();
 var st;
 $(function(){
     console.log("start");
 
-    noteTree = new NoteTree();
+    //noteTree = new NoteTree();
     url = "http://strobot.tumblr.com/post/18123513647/kamatama-udon-cherrypin";
 
     /*$.get("/",{"q":url},function(res){
       console.log(res);
       });*/
     $("#notedata").append(html);
-    prenote = new PreNote();
     $("#notedata li[class*=reblog]").css("background-color", "yellow")
     $("#notedata li[class*=reblog]").each(function(){
         //console.log(this);
