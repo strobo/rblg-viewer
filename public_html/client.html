@@ -1,88 +1,15 @@
 <html>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script src="notedata.js"></script>
-    <script type="text/javascript">
-        function NoteCell(html, name, url){
-            this.html = html;
-            this.name = name;
-            this.url = url;
-            this.child = new Array();
-        }
-        function NoteTree(){
-            this.html;
-            this.name;
-            this.url;
-            this.child = new Array();
-
-
-            this.add = function(html,name,url){}
-            
-            this.addChild = function(html, name, url){
-                this.child.push(new NoteCell(html, name, url));
-            }
-
-        }
-        function PreNote(){
-            this.note = new Array();
-            this.add = function(img_link_url, img_url, dst_url, dst_uname, src_url, src_uname){
-                this.note.push({
-                    img_link_url : img_link_url,
-                    img_url      : img_url,
-                    dst_url      : dst_url,
-                    dst_uname    : dst_uname,
-                    src_url      : src_url,
-                    src_uname    : src_uname
-                });
-            }
-        }
-        pre_note = {
-            img_link_url:"",
-            img_url:"",
-            dst_url:"",
-            dst_uname:"",
-            src_url:"",
-            src_uname:""
-        };
-
-
-        $(function(){
-            console.log("start");
-
-            noteTree = new NoteTree();
-            url = "http://strobot.tumblr.com/post/18123513647/kamatama-udon-cherrypin";
-
-            /*$.get("/",{"q":url},function(res){
-                console.log(res);
-            });*/
-            $("#notedata").append(html);
-            prenote = new PreNote();
-            $("#notedata li[class*=reblog]").css("background-color", "yellow")
-            $("#notedata li[class*=reblog]").each(function(){
-                //console.log(this);
-                if(this.children[1].childElementCount == 1){    // foo posted this
-                    prenote.add(
-                        this.children[0].href,                  //img_link_url
-                        this.children[0].children[0].src,       //img_url
-                        this.children[1].children[0].href,      //dst_url
-                        this.children[1].children[0].innerText, //dst_usrname
-                        null,      //src_url
-                        null //src_usrname
-                    );
-                } else {
-                    prenote.add(
-                        this.children[0].href,                  //img_link_url
-                        this.children[0].children[0].src,       //img_url
-                        this.children[1].children[0].href,      //dst_url
-                        this.children[1].children[0].innerText, //dst_usrname
-                        this.children[1].children[1].href,      //src_url
-                        this.children[1].children[1].innerText //src_usrname
-                    );
-                }
-            });
-        });
-    </script>
+    <head>
+        <meta charset='utf-8'>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+        <script src="jit.js"></script>
+        <script src="notedata.js"></script>
+        <script src="client.js"></script>
+    </head>
+    
     <body>
         <h1>client</h1>
+        <div id="graph"></div>
         <input type="text"id="text_url">
         <div id="notedata"></div>
     </body>
