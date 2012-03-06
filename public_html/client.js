@@ -65,35 +65,64 @@ $(function(){
 
     url = "http://strobot.tumblr.com/post/18123513647/kamatama-udon-cherrypin";
 
-    /*$.get("/",{"q":url},function(res){
-      console.log(res);
-      });*/
-    $("#notedata").append(html);
+    $("#button").click(function(){
+        var url = $("#textUrl").val();
+        $.get("/",{"q":url},function(res){
+            $("#notedata").append(res);
+            $("#notedata li[class*=reblog]").each(function(){
+                if(this.children[1].childElementCount == 1){    // foo posted this
+                    note.addList(
+                        this.children[0].href,                  //img_link_url
+                        this.children[0].children[0].src,       //img_url
+                        this.children[1].children[0].href,      //dst_url
+                        this.children[1].children[0].innerText, //dst_usrname
+                        null,                                   //src_url
+                        null                                    //src_usrname
+                    );
+                } else {
+                    note.addList(
+                        this.children[0].href,                  //img_link_url
+                        this.children[0].children[0].src,       //img_url
+                        this.children[1].children[0].href,      //dst_url
+                        this.children[1].children[0].innerText, //dst_usrname
+                        this.children[1].children[1].href,      //src_url
+                        this.children[1].children[1].innerText  //src_usrname
+                    );
+                }
+            })
+        note.listToTree();
+        st.loadJSON(note.tree);
+        st.compute();
+        st.onClick(st.root);
+        st.switchPosition('top','replot');
+        })
+    })
+    //$("#notedata").append(html);
     //notehtml = Jquery(html);
-    $("#notedata li[class*=reblog]").css("background-color", "yellow")
-    $("#notedata li[class*=reblog]").each(function(){
-        //console.log(this);
-        if(this.children[1].childElementCount == 1){    // foo posted this
-            note.addList(
-                this.children[0].href,                  //img_link_url
-                this.children[0].children[0].src,       //img_url
-                this.children[1].children[0].href,      //dst_url
-                this.children[1].children[0].innerText, //dst_usrname
-                null,      //src_url
-                null //src_usrname
-                );
-        } else {
-            note.addList(
-                this.children[0].href,                  //img_link_url
-                this.children[0].children[0].src,       //img_url
-                this.children[1].children[0].href,      //dst_url
-                this.children[1].children[0].innerText, //dst_usrname
-                this.children[1].children[1].href,      //src_url
-                this.children[1].children[1].innerText //src_usrname
-                );
-        }
-    });
-    note.listToTree();
+    //$("#notedata li[class*=reblog]").css("background-color", "yellow")
+    //$("#notedata li[class*=reblog]").each(function(){
+    //    //console.log(this);
+    //    if(this.children[1].childElementCount == 1){    // foo posted this
+    //        note.addList(
+    //            this.children[0].href,                  //img_link_url
+    //            this.children[0].children[0].src,       //img_url
+    //            this.children[1].children[0].href,      //dst_url
+    //            this.children[1].children[0].innerText, //dst_usrname
+    //            null,      //src_url
+    //            null //src_usrname
+    //            );
+    //    } else {
+    //        note.addList(
+    //            this.children[0].href,                  //img_link_url
+    //            this.children[0].children[0].src,       //img_url
+    //            this.children[1].children[0].href,      //dst_url
+    //            this.children[1].children[0].innerText, //dst_usrname
+    //            this.children[1].children[1].href,      //src_url
+    //            this.children[1].children[1].innerText //src_usrname
+    //            );
+    //    }
+    //});
+    //note.listToTree();
 
     st = new $jit.ST({
        injectInto: 'graph',
@@ -149,9 +178,9 @@ $(function(){
        }
     });
 
-    st.loadJSON(note.tree);
-    st.compute();
-    st.onClick(st.root);
-    st.switchPosition('top','replot');
+    //st.loadJSON(note.tree);
+    //st.compute();
+    //st.onClick(st.root);
+    //st.switchPosition('top','replot');
 
 });
