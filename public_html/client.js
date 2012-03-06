@@ -69,6 +69,7 @@ $(function(){
         note = new Note();
         var url = $("#textUrl").val();
         $.get("/",{"q":url},function(res){
+            $("#notedata").empty();
             $("#notedata").append(res);
             $("#notedata li[class*=reblog]").each(function(){
                 if(this.children[1].childElementCount == 1){    // foo posted this
@@ -93,6 +94,7 @@ $(function(){
             })
         note.listToTree();
         $("#graph").empty(); 
+
         st = new $jit.ST({
            injectInto: 'graph',
            //width: 1700,
@@ -107,7 +109,7 @@ $(function(){
                autoHeight: true,
                autoWidth:  true,
                type: 'rectangle',
-               color:'#23A4FF',
+               color:'#FFFFFF',
                lineWidth: 2,
                align:"center",
                overridable: true
