@@ -63,7 +63,7 @@ var st;
 $(function(){
     console.log("start");
 
-    url = "http://strobot.tumblr.com/post/18123513647/kamatama-udon-cherrypin";
+    //url = "http://strobot.tumblr.com/post/18123513647/kamatama-udon-cherrypin";
 
     $("#button").click(function(){
         note = new Note();
@@ -92,7 +92,7 @@ $(function(){
                 }
             })
         note.listToTree();
-        
+        $("#graph").empty(); 
         st = new $jit.ST({
            injectInto: 'graph',
            //width: 1700,
@@ -105,12 +105,12 @@ $(function(){
                //height: 20,
                //width: 60,
                autoHeight: true,
-           autoWidth:  true,
-           type: 'rectangle',
-           color:'#23A4FF',
-           lineWidth: 2,
-           align:"center",
-           overridable: true
+               autoWidth:  true,
+               type: 'rectangle',
+               color:'#23A4FF',
+               lineWidth: 2,
+               align:"center",
+               overridable: true
            },
 
            Navigation: {
