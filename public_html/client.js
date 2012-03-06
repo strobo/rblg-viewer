@@ -68,9 +68,9 @@ $(function(){
     $("#button").click(function(){
         note = new Note();
         var url = $("#textUrl").val();
-        $.get("/",{"q":url},function(res){
+        //$.get("/",{"q":url},function(res){
             $("#notedata").empty();
-            $("#notedata").append(res);
+            $("#notedata").append(html);
             $("#notedata li[class*=reblog]").each(function(){
                 if(this.children[1].childElementCount == 1){    // foo posted this
                     note.addList(
@@ -154,7 +154,7 @@ $(function(){
         st.compute();
         st.onClick(st.root);
         st.switchPosition('top','replot');
-        })
+        //})
     })
     //$("#notedata").append(html);
     //notehtml = Jquery(html);
