@@ -91,6 +91,61 @@ $(function(){
                 }
             })
         note.listToTree();
+        
+        st = new $jit.ST({
+           injectInto: 'graph',
+           width: 1700,
+           height:800,
+           constrained: false,
+           levelsToShow: 50,
+           levelDistance: 150,
+           Node: {
+               //height: 20,
+               //width: 60,
+               autoHeight: true,
+           autoWidth:  true,
+           type: 'rectangle',
+           color:'#23A4FF',
+           lineWidth: 2,
+           align:"center",
+           overridable: true
+           },
+
+           Navigation: {
+               enable:true,
+               panning:true
+           },
+           Edge: {
+               type: 'bezier',
+               lineWidth: 2,
+               color:'#23A4FF',
+               overridable: true
+           },
+
+           onBeforeCompute: function(node){
+               console.log("loading " + node.name);
+               console.log(node);
+           },
+
+           onAfterCompute: function(){
+               console.log("done");
+           },
+           onCreateLabel: function(label, node){
+               label.id = node.id; 
+               label.innerHTML = node.data.html;
+               //set label styles
+               var style = label.style;
+               //style.width = 60 + 'px';
+               //style.height = 17 + 'px';            
+               style.cursor = 'default';
+               style.color = '#333';
+               style.fontSize = '0.8em';
+               //style.textAlign= 'center';
+               style.webkitUserSelect = 'none';
+               //style.paddingTop = '3px';
+           }
+        });
+
         st.loadJSON(note.tree);
         st.compute();
         st.onClick(st.root);
@@ -124,59 +179,6 @@ $(function(){
     //});
     //note.listToTree();
 
-    st = new $jit.ST({
-       injectInto: 'graph',
-       width: 1700,
-       height:800,
-       constrained: false,
-       levelsToShow: 50,
-       levelDistance: 150,
-       Node: {
-           //height: 20,
-           //width: 60,
-           autoHeight: true,
-       autoWidth:  true,
-       type: 'rectangle',
-       color:'#23A4FF',
-       lineWidth: 2,
-       align:"center",
-       overridable: true
-       },
-
-       Navigation: {
-           enable:true,
-           panning:true
-       },
-       Edge: {
-           type: 'bezier',
-           lineWidth: 2,
-           color:'#23A4FF',
-           overridable: true
-       },
-
-       onBeforeCompute: function(node){
-           console.log("loading " + node.name);
-           console.log(node);
-       },
-
-       onAfterCompute: function(){
-           console.log("done");
-       },
-       onCreateLabel: function(label, node){
-           label.id = node.id; 
-           label.innerHTML = node.data.html;
-           //set label styles
-           var style = label.style;
-           //style.width = 60 + 'px';
-           //style.height = 17 + 'px';            
-           style.cursor = 'default';
-           style.color = '#333';
-           style.fontSize = '0.8em';
-           //style.textAlign= 'center';
-           style.webkitUserSelect = 'none';
-           //style.paddingTop = '3px';
-       }
-    });
 
     //st.loadJSON(note.tree);
     //st.compute();
