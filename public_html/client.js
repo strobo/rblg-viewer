@@ -58,7 +58,7 @@ function Note(){
 
 
 
-var note = new Note();
+var note;
 var st;
 $(function(){
     console.log("start");
@@ -66,6 +66,7 @@ $(function(){
     url = "http://strobot.tumblr.com/post/18123513647/kamatama-udon-cherrypin";
 
     $("#button").click(function(){
+        note = new Note();
         var url = $("#textUrl").val();
         $.get("/",{"q":url},function(res){
             $("#notedata").append(res);
@@ -94,7 +95,8 @@ $(function(){
         
         st = new $jit.ST({
            injectInto: 'graph',
-           width: 1700,
+           //width: 1700,
+           width: document.body.clientWidth,
            height:800,
            constrained: false,
            levelsToShow: 50,
