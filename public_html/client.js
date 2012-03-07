@@ -83,7 +83,7 @@ $(function(){
     $("#button").click(function(){
         note = new Note();
         var url = $("#textUrl").val();
-        //$.get("/",{"q":url},function(res){
+        $.get("/",{"q":url},function(res){
             $("#notedata").empty();
             $("#notedata").append(html);
             $("#notedata li[class*=reblog]").each(function(){
@@ -171,7 +171,7 @@ $(function(){
         st.compute();
         st.onClick(st.root);
         st.switchPosition('top','replot');
-        //})
+        })
     })
     //$("#notedata").append(html);
     //notehtml = Jquery(html);
