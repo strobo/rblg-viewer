@@ -64,10 +64,6 @@ function Note(){
 $jit.ST.Plot.NodeTypes.implement({
     'colorlessnode': {
         'render': function(node, canvas, animating) {
-            //var width = node.getData('width'),
-            //    height = node.getData('height'),
-            //    pos = this.getAlignedPos(node.pos.getc(true), width, height);
-            //this.nodeHelper.rectangle.render('fill', {x:pos.x+width/2, y:pos.y+height/2}, width, height, canvas);
       }
     }
       
@@ -77,50 +73,18 @@ var note;
 var st;
 $(function(){
     console.log("start");
-
-    //url = "http://strobot.tumblr.com/post/18123513647/kamatama-udon-cherrypin";
-
-    $("#button").click(function(){
-        note = new Note();
-        var url = $("#textUrl").val();
-        $.get("/",{"q":url},function(res){
-            $("#notedata").empty();
-            $("#notedata").append(res);
-            $("#notedata li[class*=reblog]").each(function(){
-                if(this.children[1].childElementCount == 1){    // foo posted this
-                    note.addList(
-                        this.children[0].href,                  //img_link_url
-                        this.children[0].children[0].src,       //img_url
-                        this.children[1].children[0].href,      //dst_url
-                        this.children[1].children[0].innerText, //dst_usrname
-                        null,                                   //src_url
-                        null                                    //src_usrname
-                    );
-                } else {
-                    note.addList(
-                        this.children[0].href,                  //img_link_url
-                        this.children[0].children[0].src,       //img_url
-                        this.children[1].children[0].href,      //dst_url
-                        this.children[1].children[0].innerText, //dst_usrname
-                        this.children[1].children[1].href,      //src_url
-                        this.children[1].children[1].innerText  //src_usrname
-                    );
-                }
-            })
-        note.listToTree();
-        $("#graph").empty(); 
-
+    function createST(){
         st = new $jit.ST({
            injectInto: 'graph',
-           //width: 1700,
-           width: document.body.clientWidth,
+           //width: document.body.clientWidth,
+           width: 1400,
            height:800,
            constrained: false,
            levelsToShow: 50,
            levelDistance: 150,
            Node: {
                height: 60,
-               width: 190,
+               //width: 190,
                //autoHeight: true,
                autoWidth:  true,
                //type: 'rectangle',
@@ -156,8 +120,6 @@ $(function(){
                label.className += " well";
                //set label styles
                var style = label.style;
-               //console.log(node.data.textLength);
-               //style.width = (32 + node.data.textLength*12) + 'px';
                //style.height = 30 + 'px';            
                style.cursor = 'default';
                style.color = '#000';
@@ -168,44 +130,52 @@ $(function(){
                //style.paddingTop = '3px';
            }
         });
-
+        if(!note) return;
         st.loadJSON(note.tree);
         st.compute();
         st.onClick(st.root);
         st.switchPosition('top','replot');
+    }
+    $("#button").click(function(){
+        $("#button").button('loading');
+        note = new Note();
+        var url = $("#textUrl").val();
+        $.get("/",{"q":url},function(res){
+            $("#notedata").empty();
+            $("#notedata").append(res);
+            $("#notedata li[class*=reblog]").each(function(){
+                if(this.children[1].childElementCount == 1){    // foo posted this
+                    note.addList(
+                        this.children[0].href,                  //img_link_url
+                        this.children[0].children[0].src,       //img_url
+                        this.children[1].children[0].href,      //dst_url
+                        this.children[1].children[0].innerText, //dst_usrname
+                        null,                                   //src_url
+                        null                                    //src_usrname
+                    );
+                } else {
+                    note.addList(
+                        this.children[0].href,                  //img_link_url
+                        this.children[0].children[0].src,       //img_url
+                        this.children[1].children[0].href,      //dst_url
+                        this.children[1].children[0].innerText, //dst_usrname
+                        this.children[1].children[1].href,      //src_url
+                        this.children[1].children[1].innerText  //src_usrname
+                    );
+                }
+            })
+        note.listToTree();
+        $("#graph").empty(); 
+        createST();
+        $("#button").button('reset');
+        var targetOffset = $('#graph').offset().top;
+        $('html,body').animate({scrollTop: targetOffset}, 1000);
+
         })
-    })
-    //$("#notedata").append(html);
-    //notehtml = Jquery(html);
-    //$("#notedata li[class*=reblog]").css("background-color", "yellow")
-    //$("#notedata li[class*=reblog]").each(function(){
-    //    //console.log(this);
-    //    if(this.children[1].childElementCount == 1){    // foo posted this
-    //        note.addList(
-    //            this.children[0].href,                  //img_link_url
-    //            this.children[0].children[0].src,       //img_url
-    //            this.children[1].children[0].href,      //dst_url
-    //            this.children[1].children[0].innerText, //dst_usrname
-    //            null,      //src_url
-    //            null //src_usrname
-    //            );
-    //    } else {
-    //        note.addList(
-    //            this.children[0].href,                  //img_link_url
-    //            this.children[0].children[0].src,       //img_url
-    //            this.children[1].children[0].href,      //dst_url
-    //            this.children[1].children[0].innerText, //dst_usrname
-    //            this.children[1].children[1].href,      //src_url
-    //            this.children[1].children[1].innerText //src_usrname
-    //            );
-    //    }
-    //});
-    //note.listToTree();
-
-
-    //st.loadJSON(note.tree);
-    //st.compute();
-    //st.onClick(st.root);
-    //st.switchPosition('top','replot');
+    });
+    
+    $(window).resize(function(){
+        //createST();
+    });
 
 });
