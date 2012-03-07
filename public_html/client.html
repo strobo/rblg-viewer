@@ -9,7 +9,6 @@
         <script src="jit.js"></script>
         <script src="notedata.js"></script>
         <script src="client.js"></script>
-        <script src="notedata.js"></script>
         <style>
             body {
                 padding-top: 60px;
@@ -30,6 +29,12 @@
             #notedata {
                 display: none;
             }
+            #ruler {
+                visibility:hidden;
+                position:absolute;
+                white-space:nowrap;
+                font-size:1.2em;
+            }
         </style>
     </head>
     
@@ -46,5 +51,6 @@
         </div>
         <div id="graph"></div>
         <div id="notedata"></div>
+        <a id="ruler"></a>
     </body>
 </html>

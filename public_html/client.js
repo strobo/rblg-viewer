@@ -1,3 +1,10 @@
+function getExtent(str) {
+    var e = $("#ruler");
+    e.empty();
+    e.text(str);
+    var width = e.get(0).offsetWidth; 
+    return width;
+}
 function NoteCell(html, id, name, textLength){
     this.data = {
         html      : html,
@@ -44,7 +51,8 @@ function Note(){
         for(var i = this.list.length - 1; i >= 0; i--){
             var noteCell = this.list[i];
             var html = '<a href="'+ noteCell.dst_url +'"target="_blank"><img src="'+ noteCell.img_url + '">'+ noteCell.dst_uname +'</a>';
-            var textLength = noteCell.dst_uname.length;
+            //var textLength = noteCell.dst_uname.length;
+            var textLength = getExtent(noteCell.dst_uname) + 60;
             var id = this.list.length - 1 - i;
             var name = noteCell.dst_uname;
             
@@ -107,12 +115,12 @@ $(function(){
            },
 
            onBeforeCompute: function(node){
-               console.log("loading " + node.name);
-               console.log(node);
+               //console.log("loading " + node.name);
+               //console.log(node);
            },
 
            onAfterCompute: function(){
-               console.log("done");
+               //console.log("done");
            },
            onCreateLabel: function(label, node){
                label.id = node.id; 
