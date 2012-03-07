@@ -1,10 +1,13 @@
-function NoteCell(html, id, name){
-    this.data = { html:html };
+function NoteCell(html, id, name, textLength){
+    this.data = {
+        html      : html,
+        textLength: textLength
+    };
     this.id = id;
     this.name = name;
     this.children = new Array();
-    this.addChild = function(html, id, name){
-        this.children.push(new NoteCell(html, id, name));
+    this.addChild = function(html, id, name, textLength){
+        this.children.push(new NoteCell(html, id, name, textLength));
     }
 }
 function Note(){
@@ -41,22 +44,34 @@ function Note(){
         for(var i = this.list.length - 1; i >= 0; i--){
             var noteCell = this.list[i];
             var html = '<a href="'+ noteCell.dst_url +'"><img src="'+ noteCell.img_url + '">'+ noteCell.dst_uname +'</a>';
+            var textLength = noteCell.dst_uname.length;
             var id = this.list.length - 1 - i;
             var name = noteCell.dst_uname;
             
             // when first loop. create initial note
             if(id === 0){       
-                this.tree = new NoteCell(html, id, name);
+                this.tree = new NoteCell(html, id, name, textLength);
                 continue;
             }
             var src_note = this.getTreeByName(noteCell.src_uname, this.tree);
             if(src_note === "notFound") continue;
-            src_note.addChild(html, id, name);
+            src_note.addChild(html, id, name, textLength);
         }
     }
 }
 
 
+$jit.ST.Plot.NodeTypes.implement({
+    'colorlessnode': {
+        'render': function(node, canvas, animating) {
+            //var width = node.getData('width'),
+            //    height = node.getData('height'),
+            //    pos = this.getAlignedPos(node.pos.getc(true), width, height);
+            //this.nodeHelper.rectangle.render('fill', {x:pos.x+width/2, y:pos.y+height/2}, width, height, canvas);
+      }
+    }
+      
+});
 
 var note;
 var st;
@@ -104,12 +119,13 @@ $(function(){
            levelsToShow: 50,
            levelDistance: 150,
            Node: {
-               //height: 20,
-               //width: 60,
+               height: 28,
+               width: 190,
                autoHeight: true,
                autoWidth:  true,
-               type: 'rectangle',
-               color:'#FFFFFF',
+               //type: 'rectangle',
+               type: 'colorlessnode',
+               color:'#2C4762',
                lineWidth: 2,
                align:"center",
                overridable: true
@@ -139,11 +155,12 @@ $(function(){
                label.innerHTML = node.data.html;
                //set label styles
                var style = label.style;
-               //style.width = 60 + 'px';
-               //style.height = 17 + 'px';            
+               console.log(node.data.textLength);
+               style.width = (32 + node.data.textLength*12) + 'px';
+               style.height = 30 + 'px';            
                style.cursor = 'default';
-               style.color = '#333';
-               style.fontSize = '0.8em';
+               style.color = '#000';
+               style.fontSize = '1.8em';
                //style.textAlign= 'center';
                style.webkitUserSelect = 'none';
                //style.paddingTop = '3px';
