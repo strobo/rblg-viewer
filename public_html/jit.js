@@ -8144,7 +8144,7 @@ var NodeDim = {
         var width  = n.getData('width'),
             height = n.getData('height');
         //reset label dimensions
-        style.width = n.data.textLength * 15 + 'px';
+        style.width = n.data.textLength * 16 + 'px';
         //style.width  = autoWidth? 'auto' : width + 'px';
         style.height = autoHeight? 'auto' : height + 'px';
         

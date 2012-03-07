@@ -43,7 +43,7 @@ function Note(){
     this.listToTree = function(){
         for(var i = this.list.length - 1; i >= 0; i--){
             var noteCell = this.list[i];
-            var html = '<a href="'+ noteCell.dst_url +'"><img src="'+ noteCell.img_url + '">'+ noteCell.dst_uname +'</a>';
+            var html = '<a href="'+ noteCell.dst_url +'"target="_blank"><img src="'+ noteCell.img_url + '">'+ noteCell.dst_uname +'</a>';
             var textLength = noteCell.dst_uname.length;
             var id = this.list.length - 1 - i;
             var name = noteCell.dst_uname;
@@ -119,9 +119,9 @@ $(function(){
            levelsToShow: 50,
            levelDistance: 150,
            Node: {
-               height: 28,
+               height: 60,
                width: 190,
-               autoHeight: true,
+               //autoHeight: true,
                autoWidth:  true,
                //type: 'rectangle',
                type: 'colorlessnode',
@@ -153,14 +153,16 @@ $(function(){
            onCreateLabel: function(label, node){
                label.id = node.id; 
                label.innerHTML = node.data.html;
+               label.className += " well";
                //set label styles
                var style = label.style;
-               console.log(node.data.textLength);
-               style.width = (32 + node.data.textLength*12) + 'px';
-               style.height = 30 + 'px';            
+               //console.log(node.data.textLength);
+               //style.width = (32 + node.data.textLength*12) + 'px';
+               //style.height = 30 + 'px';            
                style.cursor = 'default';
                style.color = '#000';
-               style.fontSize = '1.8em';
+               style.whiteSpace = 'nowrap';
+               style.fontSize = '1.2em';
                //style.textAlign= 'center';
                style.webkitUserSelect = 'none';
                //style.paddingTop = '3px';
