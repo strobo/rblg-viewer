@@ -85,7 +85,7 @@ $(function(){
         var url = $("#textUrl").val();
         $.get("/",{"q":url},function(res){
             $("#notedata").empty();
-            $("#notedata").append(html);
+            $("#notedata").append(res);
             $("#notedata li[class*=reblog]").each(function(){
                 if(this.children[1].childElementCount == 1){    // foo posted this
                     note.addList(
