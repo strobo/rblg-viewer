@@ -31,6 +31,13 @@ function Note(){
             src_uname    : src_uname
         });
     }
+    //this.getChildDepth = function(n, obj){
+    //    for(var i in obh){
+    //        if(obj[o] === "children"){
+    //            for(var j in obj[i]){
+    //                var res = this.getChildDepth(++n,obj[i]);
+    //                if(res ===
+    //}
     this.getTreeByName = function(name, obj){
         for(var i in obj){
             if(i === "name"){
@@ -74,7 +81,6 @@ $jit.ST.Plot.NodeTypes.implement({
         'render': function(node, canvas, animating) {
       }
     }
-      
 });
 
 var note;
@@ -85,8 +91,8 @@ $(function(){
         st = new $jit.ST({
            injectInto: 'graph',
            //width: document.body.clientWidth,
-           width: 1400,
-           height:800,
+           width: 1300,
+           height:900,
            constrained: false,
            levelsToShow: 50,
            levelDistance: 150,
