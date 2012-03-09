@@ -1,4 +1,7 @@
 RewriteEngine On
 AddHandler fcgid-script .fcgi
 RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule index.html
+
+RewriteCond getnotes?(.*)
 RewriteRule ^(.*)$ /dispatch.fcgi/$1 [QSA,L]
