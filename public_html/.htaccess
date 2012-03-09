@@ -1,6 +1,4 @@
 RewriteEngine On
 AddHandler fcgid-script .fcgi
 #RewriteCond %{REQUEST_FILENAME} !-f
-#RewriteRule /
-
-RewriteRule ^/home/[a-z]+/public_html/getnotes(.*)$ /dispatch.fcgi/$1 [QSA,L]
+RewriteRule ^/getnotes(.*)$ /dispatch.fcgi/$1 [QSA,L]
