@@ -163,7 +163,7 @@ $(function(){
                         this.children[0].href,                  //img_link_url
                         this.children[0].children[0].src,       //img_url
                         this.children[1].children[0].href,      //dst_url
-                        this.children[1].children[0].innerText, //dst_usrname
+                        this.children[1].children[0].textContent, //dst_usrname
                         null,                                   //src_url
                         null                                    //src_usrname
                     );
@@ -172,9 +172,9 @@ $(function(){
                         this.children[0].href,                  //img_link_url
                         this.children[0].children[0].src,       //img_url
                         this.children[1].children[0].href,      //dst_url
-                        this.children[1].children[0].innerText, //dst_usrname
+                        this.children[1].children[0].textContent, //dst_usrname
                         this.children[1].children[1].href,      //src_url
-                        this.children[1].children[1].innerText  //src_usrname
+                        this.children[1].children[1].textContent  //src_usrname
                     );
                 }
             })
