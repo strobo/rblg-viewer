@@ -154,7 +154,7 @@ $(function(){
         $("#button").button('loading');
         note = new Note();
         var url = $("#textUrl").val();
-        $.get("/getnotes",{"q":url},function(res){
+        $.get("/dispatch.fcgi",{"q":url},function(res){
             $("#notedata").empty();
             $("#notedata").append(res);
             $("#notedata li[class*=reblog]").each(function(){
@@ -184,12 +184,6 @@ $(function(){
         $("#button").button('reset');
         var targetOffset = $('#graph').offset().top;
         $('html,body').animate({scrollTop: targetOffset}, 1000);
-
-        })
+        });
     });
-    
-    $(window).resize(function(){
-        //createST();
-    });
-
 });
