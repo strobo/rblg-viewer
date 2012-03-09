@@ -1,98 +1,98 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <title>Welcome to Fluxflex</title>
-  <link href="http://s3.fluxflex.com/css/reset-fonts-grids.css" rel="stylesheet" type="text/css" /> 
-</head>
-<style type="text/css">
-#container {
-    width: 480px;
-    height: 350px;
-    margin: 60px auto;
-    padding: 5px 15px;
-}
-
-#header h1 {
-    color: #7DAED6;
-    font-size: 1.6em;
-    font-weight: bold;
-}
-
-#header h2 {
-    color: #7DAED6;
-    font-size: 2.5em;
-    font-weight: bold;
-}
-
-#header p {
-    color: 666;
-    font-size: 1.3em;
-    margin: 5px auto 15px;
-}
-
-.component {
-    background: url("http://s3.fluxflex.com/images/index/tools_bg.png") repeat-x scroll 0 0 #FFFFFF;
-    float: left;
-    height: 122px;
-    margin: 5px auto;
-    padding: 20px;
-    text-align: left;
-    width: 430px;
-}
-
-.component img {
-    float: left;
-    padding-top: 10px;
-}
-
-.component h3 {
-    float: left;
-    width: 340px;
-    padding-left: 17px;
-    color: #666666;
-    font-size: 1.8em;
-    font-weight: bold;
-}
-
-.component p {
-    float: left;
-    width: 340px;
-    padding: 5px 0 0 17px;
-    color: #777;
-    font-size: 1.1em;
-}
-
-#footer {
-    color: #7DAED6;
-    font-size: 1.2em;
-    font-weight: bold;
-}
-</style>
-<!-- Define Page -->
-<body>
-  <div id="wrapper">
-    <div id="container">
-      <div id="header">
-       <h1>Welcome to fluxflex!</h1>
-       <h2>This is your web service.</h2>
-       <p>At the next step, develope you web service here.
-      </div>
-      <div class="component">
-        <img src="http://s3.fluxflex.com/images/index/one_click_install.png" alt="Tools"/>
-        <h3>Easy one click OSS install and auto Git deployment</h3>
-        <p>You can install various OSS in a second just with <strong>one-click</strong>, and the installed apps are fully customizable by using Git.</p>
-      </div>
-      <div class="component">
-        <img src="http://s3.fluxflex.com/images/index/github.png" alt="Octocat"/>
-        <h3>Github Import</h3>
-        <p>You can connect your <strong>GitHub</strong> account to fluxflex. Then, you can import your private repositories as well as public repositories easily.</p>
-      </div>
-      <div id="footer">
-        <img src="http://s3.fluxflex.com/images/mini_logo.png" alt="fluxflex logo"/>
-        <p>Enjoy your development time!</p>
-      </div>
-    </div>
-  </div>
-</body>
+<!doctype html>
+<html>
+    <head>
+        <meta charset='utf-8'>
+        <title>ReblogTreeViewer</title>
+        <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+        <script src="bootstrap/js/bootstrap-button.js"></script>
+        <script src="jit.js"></script>
+        <script src="client.js"></script>
+        <style>
+            body {
+                padding-top: 60px;
+                padding-bottom: 40px;
+                background-color: #2C4762;
+            }
+            #textUrl {
+                width:100%;
+                height:32px;
+                font-size: 24px;
+            }
+            #button {
+                margin-left: 33%;
+                width:33%;
+                height:42px;
+                font-size: 22px;
+            }
+            #graph {
+                height: 900px;
+                margin-left: auto;
+                margin-right: auto;
+                padding: 0px;
+                width: 1300px;
+                overflow: hidden;
+                background-color:#173C61;
+            }
+            #notedata {
+                display: none;
+            }
+            #ruler {
+                visibility:hidden;
+                position:absolute;
+                white-space:nowrap;
+                font-size:1.2em;
+            }
+            hr {
+                border-top: 1px solid #999;
+                border-bottom: 1px solid #ddd;
+            }
+            footer hr {
+                border-top: 1px solid #333;
+                border-bottom: 1px solid #555;
+            }
+            footer p {
+                color: #ddd;
+                text-align: center;
+            }
+        </style>
+    </head>
+    
+    <body>
+        <div class="container">
+            <div class="hero-unit well">
+                <h1>TumblrReblogViewer</h1>
+                <p>
+                Tumblrのリグログを図で表示<br>
+                </p>
+                <h3>これは何？</h3>
+                <p>
+                　自分のReblogが誰にリブログされたか気になりますよね。これはTumblrのnotesを使ってリブログを図で表示してくれるツールです。
+                </p>
+                <h3>使い方</h3>
+                <p>　リブログを見たいPostのアドレス（例 http://strobot.tumblr.com/foo)を下のテキストボックスに入力してShow Reblogをクリック。あとはReblogを眺めて2828するだけ。</p>
+                <h3>制限</h3>
+                <p>　notesを取得するTumblrAPIがないので、htmlから無理やりnotesを取得しています。そのせいでだいたい50notes以上ないとうまく動作しません。<br>
+                あまりにもnotesが多い（数千notes以上）だとサーバーが悲鳴を上げるので程々にしてね。</p>
+                <h3>謝辞</h3>
+                <p>　このツールはサーバーに<a href="http://www.fluxflex.com"target="_blank">fluxflex</a>を使用しています。Tumblrのnotesの取得に<a href="https://github.com/yuribossa/TumblrReblogTree"target="_blank">yuribossaさんのコード</a>を参考にしています。その他<a href="http://twitter.github.com/bootstrap/"target="_blank">TwitterBootstrap</a> <a href="http://jquery.com/"target="_blank">jQuery</a> <a href="http://thejit.org/"target="_blank">JavaScriptInfoVisToolkit</a>を使用しています。各開発者の方、ありがとうございます。
+                </p>
+                <h3>作者(strobo)について</h3>
+                <p><a href="http://strobot.tumblr.com/"target="_blank">Tumblr</a><br>
+                <a href="http://twitter.com/_strobo"target="_blank">Twitter</a><br>
+                ソースコードは<a href="https://github.com/strobo/rblg-viewer"target="_blank">github</a>にあります
+                </p>
+                <hr>
+                <input type="text"id="textUrl"class="input-large"placeholder="Type Post URL">
+                <button id="button"class="btn btn-primary btn-large"data-loading-text="loading...">Show Reblog</button>
+            </div>
+        </div>
+        <div id="graph"class="well"></div>
+        <footer>
+        <hr>
+        <p>Created by Strobo. 2012</p>
+        </footer>
+        <div id="notedata"></div>
+        <a id="ruler"></a>
+    </body>
 </html>

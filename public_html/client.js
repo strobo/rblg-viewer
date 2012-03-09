@@ -154,7 +154,7 @@ $(function(){
         $("#button").button('loading');
         note = new Note();
         var url = $("#textUrl").val();
-        $.get("/",{"q":url},function(res){
+        $.get("/getnotes",{"q":url},function(res){
             $("#notedata").empty();
             $("#notedata").append(res);
             $("#notedata li[class*=reblog]").each(function(){
