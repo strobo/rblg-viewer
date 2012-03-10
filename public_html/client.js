@@ -153,7 +153,13 @@ $(function(){
         note = new Note();
         var url = $("#textUrl").val();
         $.get("/dispatch.fcgi",{"q":url},function(res){
-            if(res === 'invaildURL'){
+            if(res === 'notesNotFound'){
+                $("#errormsg").css("display","block");
+                $("#button").button('reset');
+                $(".close").click(function(){
+                    $(this).css("display","none");
+                });
+                return;
             }
             $("#notedata").empty();
             $("#notedata").append(res);
