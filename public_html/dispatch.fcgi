@@ -7,7 +7,12 @@ import urllib
 sys.path.insert(0, "/home/FLX_PROJECT_NAME/lib/")
 
 def getNoteByThisHtml(page):
-    return 'getNoteByHtml'
+    try:
+        # Extract between '<!-- START NOTES -->' to '<!-- END NOTES -->'
+        return page.split('<!-- START NOTES -->')[1].split('<!-- END NOTES -->')[0]
+    except IndexError:
+        return 'notesNotFound'
+    
 def getNote(url):
     #url = 'http://strobot.tumblr.com/post/18123513647/kamatama-udon-cherrypin'
     base_url = re.compile('(http://[\w-]+\.tumblr\.com)').search(url)

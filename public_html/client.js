@@ -90,7 +90,6 @@ $(function(){
     function createST(){
         st = new $jit.ST({
            injectInto: 'graph',
-           //width: document.body.clientWidth,
            width: 1300,
            height:900,
            constrained: false,
@@ -101,7 +100,6 @@ $(function(){
                //width: 190,
                //autoHeight: true,
                autoWidth:  true,
-               //type: 'rectangle',
                type: 'colorlessnode',
                color:'#2C4762',
                lineWidth: 2,
@@ -155,6 +153,8 @@ $(function(){
         note = new Note();
         var url = $("#textUrl").val();
         $.get("/dispatch.fcgi",{"q":url},function(res){
+            if(res === 'invaildURL'){
+            }
             $("#notedata").empty();
             $("#notedata").append(res);
             $("#notedata li[class*=reblog]").each(function(){
