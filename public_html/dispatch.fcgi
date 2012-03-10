@@ -6,13 +6,20 @@ import urllib
 
 sys.path.insert(0, "/home/FLX_PROJECT_NAME/lib/")
 
-def getnote(url):
+def getNoteByThisHtml(page):
+    return 'getNoteByHtml'
+def getNote(url):
     #url = 'http://strobot.tumblr.com/post/18123513647/kamatama-udon-cherrypin'
     base_url = re.compile('(http://[\w-]+\.tumblr\.com)').search(url)
+    if base_url is None:
+        return 'invalidURL'
     base_url = base_url.group(1)
 
     res = urllib.urlopen(url)
-    notes_url = re.compile('(/notes/\d+/\w+)\?').search(res.read())
+    page = res.read()
+    notes_url = re.compile('(/notes/\d+/\w+)\?').search(page)
+    if notes_url is None:
+        return getNoteByThisHtml(page)
 
     next_url = base_url + notes_url.group(1)
     
@@ -38,7 +45,7 @@ def myapp(environ, start_response):
     req = { req[0]: req[2]}
     start_response('200 OK', [('Content-Type', 'text/plain')])
 
-    return [getnote(req['q'])]
+    return [getNote(req['q'])]
     #return [pprint.pformat(req)]
 
 if __name__ == '__main__':
