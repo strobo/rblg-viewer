@@ -157,7 +157,7 @@ $(function(){
                 $("#errormsg").css("display","block");
                 $("#button").button('reset');
                 $(".close").click(function(){
-                    $(this).css("display","none");
+                    $("#errormsg").css("display","none");
                 });
                 return;
             }
