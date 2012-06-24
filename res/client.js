@@ -64,7 +64,7 @@ function Note(){
             var name = noteCell.dst_uname;
             
             // when first loop. create initial note
-            if(id === 0){       
+            if(id === 0){
                 this.tree = new NoteCell(html, id, name, textLength);
                 continue;
             }
@@ -132,7 +132,7 @@ $(function(){
                label.className += " well";
                //set label styles
                var style = label.style;
-               //style.height = 30 + 'px';            
+               //style.height = 30 + 'px';
                style.cursor = 'default';
                style.color = '#000';
                style.whiteSpace = 'nowrap';
@@ -152,7 +152,7 @@ $(function(){
         $("#button").button('loading');
         note = new Note();
         var url = $("#textUrl").val();
-        $.get("/dispatch.fcgi",{"q":url},function(res){
+        $.get("/",{"q":url},function(res){
             if(res === 'notesNotFound'){
                 $("#errormsg").css("display","block");
                 $("#button").button('reset');
